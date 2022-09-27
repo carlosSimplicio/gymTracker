@@ -1,5 +1,8 @@
-from django.http import JsonResponse
+from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
 
-
-def hello(_):
-    return JsonResponse("Hello", safe=False)
+# @csrf_exempt
+def create_session(request):
+    session_data = request.POST.dict()
+    print(session_data)
+    return HttpResponse('received', status=201)
