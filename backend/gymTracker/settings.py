@@ -77,14 +77,14 @@ WSGI_APPLICATION = "gymTracker.wsgi.application"
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.mysql',
-    #     'NAME': 'mysql',
-    #     'USER': 'mysql',
-    #     'PASSWORD': 'mysql',
-    #     'HOST': 'db',
-    #     'PORT': '3306',
-    # }
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get("DATABASE_NAME", "postgres"),
+        'USER': os.environ.get("DATABASE_USER", "postgres"),
+        'PASSWORD': os.environ.get("DATABASE_PASSWORD", "postgres"),
+        'HOST': os.environ.get("DATABASE_HOST", "db"),
+        'PORT': os.environ.get("DATABASE_PORT", "5432"),
+    }
 }
 
 
