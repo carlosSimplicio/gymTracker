@@ -39,6 +39,9 @@ export default {
             trainings: [],
         }
     },
+    mounted() {
+        this.setToken()
+    },
     methods: {
         toggle() {
             this.visible = !this.visible
@@ -56,17 +59,23 @@ export default {
                 trainings: [ ...this.trainings ]
             }
         },
+        async setToken() {
+            await fetch('http://localhost:8001/session/token')
+        },  
         async createSession() {
             const payload = this.mountCreateSessionPayload()
             let fd = new FormData()
             for (let [key, value] of Object.entries(payload)) {
                 fd.append(key, value)
             }
-            response = await fetch('http://localhost:8000/session/', {
+            let response = await fetch('http://localhost:8001/session/', {
                 method: 'POST',
-                body: fd
+                body: fd,
+                credentials: 'include',
+                headers: {
+                    'X-CSRFToken': this.$cookies.get('csrftoken'),
+                }
             })
-            console.log(response)
         }
     }
 }
