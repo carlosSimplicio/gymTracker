@@ -1,0 +1,16 @@
+Ver se tem swap configurado: sudo swapon --show
+Ver valores de swap configurados: free -h
+
+Ver espaço disponível no hd (mounted on /): df -h
+
+Cria arquivo de swap, 1G é o tamanho da RAM da instancia: sudo fallocate -l 1G /swapfile
+Configura permissões: sudo chmod 600 /swapfile
+Marca o arquivo como para swap: sudo mkswap /swapfile
+
+As configs acima só funcionam para sessão atual, para tornar permanente: echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
+
+Configura swappiness(O quanto o sistema vai querer gravar em swap, para servidores o ideal é proximo de zero): sudo sysctl vm.swappiness=10
+A config anterior tbm é só para a sessão, para ficar permanente: sudo nano /etc/sysctl.conf e escreve vm.swappiness=10 no final do arquivo
+
+Configura Cache Pressure Setting (O quanto o sistema vai querer cachear informações do filesystem): sudo sysctl vm.vfs_cache_pressure=50
+A config anterior tbm é só para a sessão, para ficar permanente: sudo nano /etc/sysctl.conf e escreve vm.vfs_cache_pressure=50 no final do arquivo

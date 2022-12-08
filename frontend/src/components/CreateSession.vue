@@ -52,7 +52,7 @@ export default {
         addTraining(training) {
             this.trainings.push(training)
         },
-        mountCreateSessionPayload() {
+        buildCreateSessionPayload() {
             return {
                 session_name: this.sessionName,
                 day_of_week: this.dayOfWeek,
@@ -63,7 +63,7 @@ export default {
             await fetch('http://localhost:8001/session/token')
         },  
         async createSession() {
-            const payload = this.mountCreateSessionPayload()
+            const payload = this.buildCreateSessionPayload()
             let fd = new FormData()
             for (let [key, value] of Object.entries(payload)) {
                 fd.append(key, value)
