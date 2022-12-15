@@ -24,10 +24,6 @@ export default {
             password: '',
         }
     },
-    async mounted() {
-        await this.authStore.getUser()
-        if (this.authStore.isAuthenticated) this.$router.push('/home')
-    },
     methods: {
         async signIn() {
             if (!(this.username && this.password)) return

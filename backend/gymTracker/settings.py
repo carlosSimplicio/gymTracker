@@ -129,3 +129,4 @@ CORS_ALLOW_HEADERS = list(default_headers) + [
     "xsrfheadername",
 ]
 
+LOGIN_URL = '/login'

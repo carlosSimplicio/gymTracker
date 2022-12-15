@@ -1,8 +1,8 @@
 from core import service
 from django.http import HttpResponse, JsonResponse
-from django.views.decorators.csrf import ensure_csrf_cookie
+from django.views.decorators.csrf import ensure_csrf_cookie, csrf_exempt
 from django.views.decorators.http import require_POST, require_GET
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
 
@@ -25,6 +25,7 @@ def list_sessions(_):
     sessions = service.list_sessions()
     return JsonResponse(sessions, safe=False)
 
+@csrf_exempt
 @ensure_csrf_cookie
 @require_POST
 def sign_in(request):
@@ -35,6 +36,13 @@ def sign_in(request):
         return HttpResponse(status=200)
 
     return HttpResponse(status=401)
+
+@require_POST
+def sign_out(request):
+    logout(request)
+    return HttpResponse(status=200)
+
+
 
 @login_required
 def who_am_i(request):

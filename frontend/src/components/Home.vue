@@ -7,24 +7,12 @@
 </template>
 <script>
 import CreateSession from './CreateSession.vue'
-import { useAuthStore } from '../stores/auth'
 
 export default {
-  setup() {
-    const authStore = useAuthStore()
-    return { authStore }
-  },
   components: {CreateSession},
   data() {
-    return {  
+    return {
     }
-  },
-  async mounted() {
-        await this.authStore.getUser()
-
-        if (!this.authStore.isAuthenticated) {
-            this.$router.push('/login')
-        }
   },
   methods: {
     showCreateSessionPopup() {
