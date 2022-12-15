@@ -1,5 +1,5 @@
 from django.contrib import admin
-from create_session.models import Session, Training, Exercise, Serie, MuscleGroup
+from core.models import Session, Training, Exercise, Serie, MuscleGroup
 
 
 class SessionAdmin(admin.ModelAdmin):

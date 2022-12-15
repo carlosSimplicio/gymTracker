@@ -7,8 +7,10 @@
     "preview": "vite preview --port 4173"
   },
   "dependencies": {
+    "pinia": "^2.0.28",
     "vue": "^3.2.38",
-    "vue3-cookies": "^1.0.6"
+    "vue-cookies": "^1.8.2",
+    "vue-router": "^4.1.6"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^3.0.3",

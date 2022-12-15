@@ -1,5 +1,13 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import VueCookies from 'vue3-cookies'
+import { router } from './routes'
+import VueCookies from 'vue-cookies'
+import { createPinia } from 'pinia'
 
-createApp(App).use(VueCookies).mount('#app')
+const pinia = createPinia()
+
+createApp(App)
+.use(router)
+.use(VueCookies)
+.use(pinia)
+.mount('#app')

@@ -15,9 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from create_session import urls as create_session_urls
+from core import urls as core_urls
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("session/", include(create_session_urls)),
+    path("", include(core_urls)),
 ]

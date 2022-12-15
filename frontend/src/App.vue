@@ -1,24 +1,7 @@
 <template>
-    <div class="main-container">
-      <h1>Criar nova sessão</h1>
-      <button @click="showCreateSessionPopup">Criar</button>
-      <create-session ref="createSessionPopup"/>
-    </div>
+    <router-view></router-view>
 </template>
 <script>
-import CreateSession from './components/CreateSession.vue'
-export default {
-  components: {CreateSession},
-  data() {
-    return {  
-    }
-  },
-  methods: {
-    showCreateSessionPopup() {
-      this.$refs.createSessionPopup.toggle()
-    }
-  }
-}
 </script>
 <style>
 body {

@@ -39,15 +39,12 @@ export default {
             trainings: [],
         }
     },
-    mounted() {
-        this.setToken()
-    },
     methods: {
         toggle() {
             this.visible = !this.visible
         },
         showAddTrainingPopup() {
-            this.$refs.addTrainingPopup.toggle()
+            this.$refs.addTrainingPopup.show()
         },
         addTraining(training) {
             this.trainings.push(training)
@@ -56,12 +53,9 @@ export default {
             return {
                 session_name: this.sessionName,
                 day_of_week: this.dayOfWeek,
-                trainings: [ ...this.trainings ]
+                trainings: JSON.stringify(this.trainings)
             }
         },
-        async setToken() {
-            await fetch('http://localhost:8001/session/token')
-        },  
         async createSession() {
             const payload = this.buildCreateSessionPayload()
             let fd = new FormData()

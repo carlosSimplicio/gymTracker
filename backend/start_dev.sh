@@ -4,7 +4,7 @@ export DJANGO_SUPERUSER_EMAIL=admin@admin.com
 export DJANGO_SUPERUSER_USERNAME=admin
 export DJANGO_SUPERUSER_PASSWORD=admin
 
-# Hackzinho pra esperar o db subir
+# Hackzinho pra esperar o db subir, depois trocar pro wait-for-it
 sleep 10
 
 

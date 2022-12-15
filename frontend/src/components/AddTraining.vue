@@ -63,31 +63,27 @@ export default {
             qtdSeries: 0,
             series: [],
             selectedExercise: null,
-            exercises: [
-                {
-                    id: 1,
-                    name: 'Rosca Direta',
-                    min: 6,
-                    max: 15,
-                },
-                {
-                    id: 2,
-                    name: 'Triceps Francês',
-                    min: 6,
-                    max: 15,
-                },
-                {
-                    id: 3,
-                    name: 'Remada curvada',
-                    min: 6,
-                    max: 15,
-                }
-            ]
+            exercises: []
         }
     },
+    async mounted() {
+        let response = await fetch("http://localhost:8001/exercise/list")
+        this.exercises = await response.json()
+    },
     methods: {
+        show() {
+            this.resetForm()
+            this.toggle()
+        },
         toggle() {
             this.visible = !this.visible
+        },
+        resetForm() {
+            this.selectedExercise = null
+            this.series = []
+            this.qtdSeries = 0,
+            this.maxReps = 0,
+            this.min_reps = 0
         },
         handleSeriesArray() {
             if (this.qtdSeries > this.series.length) {
@@ -125,7 +121,7 @@ export default {
             })
             .sort((a,b) => a.order - b.order)
         },
-        mountTrainingObject() {
+        buildTrainingObject() {
             return {
                 name: `${this.selectedExercise.name} - ${this.qtdSeries} sets de ${this.minReps} a ${this.maxReps}`,
                 exercise: this.selectedExercise,
@@ -136,7 +132,7 @@ export default {
             }
         },
         addTraining() {
-            const training = this.mountTrainingObject()
+            const training = this.buildTrainingObject()
             this.$emit('add-training', training)
             this.toggle()
         }
