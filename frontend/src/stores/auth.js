@@ -1,8 +1,17 @@
 import { defineStore } from 'pinia'
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 
 export const useAuthStore = defineStore('auth', () => {
     const user = ref({})
+    
+    const userInStorage = localStorage.getItem('currentUser')
+    if (userInStorage) {
+        user.value = JSON.parse(userInStorage)
+    }
+
+    watch(() => user, (state) => {
+        localStorage.setItem('currentUser', JSON.stringify(state.value))
+    }, { deep: true })
 
     const isAuthenticated = computed(() => !!user.value && !!user.value.authenticated)
     const getUser = async () => {
